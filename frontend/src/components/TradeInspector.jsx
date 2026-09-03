@@ -80,7 +80,7 @@ function TradeInspector({ trade, update }) {
             </div>
 
             <div className="trade-inspector-button-group">
-                <button>Sold</button>
+                {!trade?.status && <button type="button">Sold</button>}
                 <button>Update</button>
             </div>
         </div>
