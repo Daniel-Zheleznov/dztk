@@ -11,7 +11,7 @@ function App() {
         { unique_id: 2, ticker: "ASTS", count: 2, buy_date: "2024-06-26", buy_price: "$11.26", type: "Share"},
         { unique_id: 3, ticker: "ASTS", count: 3, buy_date: "2024-08-26", buy_price: "$33.05", type: "Share"},
         { unique_id: 4, ticker: "ASTS", count: 2, buy_date: "2026-06-11", buy_price: "$93.72", type: "Share"},
-        { unique_id: 5, ticker: "ASTS", count: 11.7303, buy_date: "2026-7-24", buy_price: "$56.26", type: "Share"},
+        { unique_id: 5, ticker: "ASTS", count: 11.7303, buy_date: "2026-07-24", buy_price: "$56.26", type: "Share"},
         { unique_id: 6, ticker: "PL", count: 4, buy_date: "2026-04-16", buy_price: "$38.13", type: "Share"},
         { unique_id: 7, ticker: "PL", count: 1, buy_date: "2026-06-11", buy_price: "$32.75", type: "Share"},
         { unique_id: 8, ticker: "VYM", count: 2, buy_date: "2026-06-09", buy_price: "$158.47", type: "ETF"},
@@ -22,15 +22,20 @@ function App() {
         { unique_id: 13, ticker: "DZ", count: 1, buy_date: "2026-08-29", buy_price: "$425.53", type: "Share"},
     ];
 
+    function active_trade_update(trade, key, value) {
+        const trade_update = {...trade, [key]: value};
+        set_active_trade(trade_update);
+    }
+
     return (
         <>  
             <div className='trade-viewer'>
                 <TradeRow header={true}/>
                 {trades.map((item, index) => {
-                    return <TradeRow highlighted={index+1 == active_trade.unique_id} trade={item} header={false} on_click={(trade) => {set_active_trade(trade)}}/>
+                    return <TradeRow highlighted={index+1 == active_trade.unique_id} trade={item} header={false} on_click={(trade) => {set_active_trade({...trade})}}/>
                 })}
             </div>
-            <TradeInspector trade={active_trade}/>
+            <TradeInspector trade={active_trade} update={active_trade_update}/>
         </>
     )
 }
