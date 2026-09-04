@@ -1,4 +1,4 @@
-function TradeInspector({ trade, update }) {
+function TradeInspector({ trade, update_local, update_global }) {
     return (
         <div className="trade-inspector">
             <div className="trade-inspector-group">
@@ -7,7 +7,7 @@ function TradeInspector({ trade, update }) {
                     name="ticker"
                     value={trade?.ticker ?? "Select a ticker"}
                     disabled={!trade?.ticker}
-                    onChange={(event) => update(trade, "ticker", event.target.value)}
+                    onChange={(event) => update_local(trade, "ticker", event.target.value)}
                     type="text"
                 />
             </div>
@@ -18,17 +18,17 @@ function TradeInspector({ trade, update }) {
                     name="count"
                     value={trade?.count ?? "0"}
                     disabled={!trade?.count}
-                    onChange={(event) => update(trade, "count", event.target.value)}
+                    onChange={(event) => update_local(trade, "count", event.target.value)}
                 />
             </div>
 
             <div className="trade-inspector-group">
-                <label htmlFor="buy_price">Buy ($):</label>
+                <label htmlFor="ticker_price">Ticker price ($):</label>
                 <input
-                    name="buy_price"
-                    value={trade?.buy_price ?? "$0.00"}
-                    disabled={!trade?.buy_price}
-                    onChange={(event) => update(trade, "buy_price", event.target.value)}
+                    name="ticker_price"
+                    value={trade?.ticker_price ?? "$0.00"}
+                    disabled={!trade?.ticker_price}
+                    onChange={(event) => update_local(trade, "ticker_price", event.target.value)}
                 />
             </div>
 
@@ -38,7 +38,7 @@ function TradeInspector({ trade, update }) {
                     name="sell_price"
                     value={trade?.sell_price ?? "$0.00"}
                     disabled={!trade?.sell_price}
-                    onChange={(event) => update(trade, "sell_price", event.target.value)}
+                    onChange={(event) => update_local(trade, "sell_price", event.target.value)}
                 />
             </div>
 
@@ -47,7 +47,7 @@ function TradeInspector({ trade, update }) {
                 <select 
                     disabled={!trade?.type}
                     value={trade?.type?.toLowerCase().replace(" ", "_") || ""} 
-                    onChange={(event) => update(trade, "type", event.target.value)}
+                    onChange={(event) => update_local(trade, "type", event.target.value)}
                 >
                     <option value="share">Share</option>
                     <option value="etf">ETF</option>
@@ -64,7 +64,7 @@ function TradeInspector({ trade, update }) {
                     value={trade?.buy_date ?? ""}
                     disabled={!trade?.buy_date}
                     type="date"
-                    onChange={(event) => update(trade, "buy_date", event.target.value || "")}
+                    onChange={(event) => update_local(trade, "buy_date", event.target.value || "")}
                 />
             </div>
 
@@ -75,13 +75,13 @@ function TradeInspector({ trade, update }) {
                     value={trade?.sell_date ?? ""}
                     disabled={false}
                     type="date"
-                    onChange={(event) => update(trade, "sell_date", event.target.value || "")}
+                    onChange={(event) => update_local(trade, "sell_date", event.target.value || "")}
                 />
             </div>
 
             <div className="trade-inspector-button-group">
                 {!trade?.status && <button type="button">Sold</button>}
-                <button>Update</button>
+                <button onClick={(event) => update_global(trade)}>Update</button>
             </div>
         </div>
     )
