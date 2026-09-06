@@ -85,7 +85,14 @@
 
 .trade-inspector-group {
     display: flex;
+    flex-direction: column;
+}
+
+.trade-inspector-error-row {
+    display: flex;
     flex-direction: row;
+
+    flex-grow: 1;
 }
 
 .trade-inspector-group label {
@@ -93,7 +100,7 @@
     margin-right: 5px;
 }
 
-.trade-inspector-group input {
+.trade-inspector-group input, select {
     flex: 1;
     margin-right: 10px;
 }
@@ -105,4 +112,11 @@
     justify-content: flex-end;
 
     gap: 10px;
+}
+
+.trade-inspector-error {
+    font-size: 16px;
+    margin: 0px;
+
+    color: red;
 }
