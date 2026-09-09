@@ -85,7 +85,7 @@
 
 .trade-inspector-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .trade-inspector-error-row {
