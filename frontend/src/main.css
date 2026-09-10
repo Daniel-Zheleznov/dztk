@@ -114,6 +114,48 @@
     gap: 10px;
 }
 
+.trade-inspector-sold-dialog-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.trade-inspector-sold-dialog-group * {
+    align-self: center;
+}
+
+.trade-inspector-sold-dialog-group > button {
+    padding: 0px;
+    margin: 0px;
+
+    margin-top: 10px;
+
+    flex-grow: 0;
+    align-self: center;
+    width: 50%;
+}
+
+.total-inspector {
+    width: 50vw;
+    height: calc(50vh - 40px - 8px);
+
+    margin-right: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 2px solid black;
+    border-radius: 5px;
+
+    overflow: auto;
+
+    user-select: none;
+}
+
+.inspectors {
+    display: flex;
+    flex-direction: row;
+}
+
 .trade-inspector-error {
     font-size: 16px;
     margin: 0px;

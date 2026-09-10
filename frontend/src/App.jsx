@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import TradeInspector from "./components/TradeInspector"
 import TradeRow from './components/TradeRow';
+import TotalInspector from './components/TotalInspector';
 
 function App() {
     const [active_trade, set_active_trade] = useState({ unique_id: -1 });
@@ -111,7 +112,11 @@ function App() {
                     return <TradeRow key={item.unique_id} highlighted={index+1 == active_trade.unique_id} trade={item} header={false} on_click={(trade) => {set_active_trade({...trade})}}/>
                 })}
             </div>
-            <TradeInspector trade={active_trade} update_local={update_active_trade} update_global={update_global_trade}/>
+
+            <div className="inspectors">
+                <TradeInspector trade={active_trade} update_local={update_active_trade} update_global={update_global_trade}/>
+                <TotalInspector/>
+            </div>
         </>
     )
 }
