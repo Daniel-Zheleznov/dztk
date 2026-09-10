@@ -1,4 +1,30 @@
+import { useRef } from 'react';
+
 function TradeInspector({ trade, update_local, update_global }) {
+    const sold_dialog_ref = useRef(null);
+
+
+    function sold_command() {
+        sold_dialog_ref.current.showModal();
+    }
+
+    function sold_command_confirm() {
+        const today = new Date();
+        update_global({...trade, 
+            sell_date: today.getFullYear() + '-' + ('0' + (today.getMonth()+1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2), 
+            sell_price: trade.sell_price.slice(1, trade.sell_price.length),
+            status: "Sold",
+        });
+
+        sold_dialog_ref.current.close();
+    }
+
+    function sold_command_cancel() {
+        update_global({...trade,
+            status: "Market",
+        });
+    }
+
     return (
         <div className="trade-inspector">
             <div className="trade-inspector-group">                
@@ -80,9 +106,24 @@ function TradeInspector({ trade, update_local, update_global }) {
             </div>
 
             <div className="trade-inspector-button-group">
-                {(!trade?.status || trade?.status.toLowerCase() == "market") && <button type="button">Sold</button>}
+                {(!trade?.status || trade?.status.toLowerCase() == "market") && <button type="button" onClick={sold_command}>Sold</button>}
                 <button onClick={(event) => update_global(trade)}>Update</button>
             </div>
+
+            <dialog id="trade-inspector-sold-dialog" ref={sold_dialog_ref} onCancel={sold_command_cancel}>
+                <div className="trade-inspector-sold-dialog-group">
+                    <div>
+                        <label htmlFor="sell_price">Sell ($):</label>
+                        <input
+                            name="sell_price"
+                            value={trade?.sell_price ? (trade.sell_price.startsWith("$") ? trade.sell_price : "$" + trade.sell_price) : ""}
+                            // disabled={(trade?.unique_id === -1) || (!trade?.sell_price)}
+                            onChange={(event) => update_local(trade, "sell_price", event.target.value)}
+                        />
+                    </div>
+                    <button onClick={sold_command_confirm}>Confirm</button>
+                </div>
+            </dialog>
         </div>
     )
 }
