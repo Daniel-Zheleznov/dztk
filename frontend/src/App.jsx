@@ -115,7 +115,7 @@ function App() {
 
             <div className="inspectors">
                 <TradeInspector trade={active_trade} update_local={update_active_trade} update_global={update_global_trade}/>
-                <TotalInspector/>
+                <TotalInspector trades={trades}/>
             </div>
         </>
     )
