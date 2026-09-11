@@ -151,6 +151,14 @@
     user-select: none;
 }
 
+.total-inspector > * {
+    margin: 0px;
+    padding: 0px;
+
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
 .inspectors {
     display: flex;
     flex-direction: row;

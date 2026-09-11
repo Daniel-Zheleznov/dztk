@@ -11,6 +11,8 @@ function TotalInspector({ trades }) {
     return (
         <div className="total-inspector">
             <p className="total-inspector-total-sale-count">Total sale count: {total_sale_count}</p>
+            <p className="total-inspector-total-return">Total returns: </p>
+            <p className="total-inspector-avg-return">Average return: </p>
         </div>
     );
 }
